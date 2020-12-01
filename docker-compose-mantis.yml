@@ -1,0 +1,33 @@
+version: '2'
+services:
+  mantisbt:
+    container_name: mantisbt
+    image: vimagick/mantisbt:latest
+    ports:
+     - "8070:80"
+    links:
+     - mysql
+    volumes:
+      - '$PWD/mantis_home:/bitnami/mantis'
+    networks:
+      - net
+    restart: always
+  mysql:
+    container_name: mysql_mantis
+    image: mysql:5.7
+    ports:
+     - "3307:3306"
+    volumes:
+      - $PWD/mariadb_matis_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=bugtracker
+      - MYSQL_PORT=3307
+      - MYSQL_USER=mantisbt
+      - MYSQL_PASSWORD=mantisbt
+    networks:
+      - net
+    restart: always
+networks:
+  net:
+  
