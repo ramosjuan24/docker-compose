@@ -1,0 +1,33 @@
+version: '2'
+services:
+  mariadb:
+    container_name: mariadb
+    image: 'docker.io/bitnami/mariadb:10.3-debian-10'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=bn_testlink
+      - MARIADB_DATABASE=bitnami_testlink
+    volumes:
+      - '$PWD/mariadb_data:/bitnami/mariadb'
+    networks:
+      - net
+  testlink:
+    container_name: testlink
+    image: 'docker.io/bitnami/testlink:1-debian-10'
+    ports:
+      - '8090:8080'
+      - '8443:8443'
+    environment:
+      - TESTLINK_DATABASE_HOST=mariadb
+      - TESTLINK_DATABASE_PORT_NUMBER=3306
+      - TESTLINK_DATABASE_USER=bn_testlink
+      - TESTLINK_DATABASE_NAME=bitnami_testlink
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - '$PWD/testlink_home:/bitnami/testlink'
+    networks:
+      - net
+    depends_on:
+      - mariadb
+networks:
+  net:
