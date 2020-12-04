@@ -22,6 +22,9 @@ services:
       - TESTLINK_DATABASE_PORT_NUMBER=3306
       - TESTLINK_DATABASE_USER=bn_testlink
       - TESTLINK_DATABASE_NAME=bitnami_testlink
+      - TESTLINK_SMTP_HOST=mail.dominio.local
+      - TESTLINK_SMTP_PORT=25
+      - TESTLINK_SMTP_USER=""
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '$PWD/testlink_home:/bitnami/testlink'
