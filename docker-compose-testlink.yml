@@ -25,6 +25,7 @@ services:
       - TESTLINK_SMTP_HOST=mail.dominio.local
       - TESTLINK_SMTP_PORT=25
       - TESTLINK_SMTP_USER=""
+      - TESTLINK_SMTP_PASSWORD=""
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - '$PWD/testlink_home:/bitnami/testlink'
